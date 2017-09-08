@@ -26,20 +26,21 @@ def main(width, height, cmap, darken, outdir):
 
     cmap = matplotlib.cm.get_cmap(cmap)
 
-    for y in range(height):
-        for x in range(width):
-            color = cmap(x / width)  # rgba
-            r, g, b, a = color
+    for x in range(width):
+        color = cmap(x / width)  # rgba
+        r, g, b, a = color
 
-            color_bytes = to_color_bytes(r, g, b, a)
-            im1.putpixel((x, y), color_bytes)  # place the pixel
+        color_bytes1 = to_color_bytes(r, g, b, a)
 
-            h, l, s = colorsys.rgb_to_hls(r, g, b)
-            l = l * (1 - darken)
-            r, g, b = colorsys.hls_to_rgb(h, l, s)
+        h, l, s = colorsys.rgb_to_hls(r, g, b)
+        l = l * (1 - darken)
+        r, g, b = colorsys.hls_to_rgb(h, l, s)
 
-            color_bytes = to_color_bytes(r, g, b, a)
-            im2.putpixel((x, y), color_bytes)  # place the pixel
+        color_bytes2 = to_color_bytes(r, g, b, a)
+
+        for y in range(height):
+            im1.putpixel((x, y), color_bytes1)  # place the pixel
+            im2.putpixel((x, y), color_bytes2)  # place the pixel
 
     im1.save(os.path.join(outdir, "bargraph_foreground.png"))
     im2.save(os.path.join(outdir, "bargraph_background.png"))
