@@ -8,8 +8,8 @@ import matplotlib.cm
 import colorsys
 
 
-def to_color_bytes(r, g, b, a):
-    return int(r * 255), int(g * 255), int(b * 255), int(a * 255)
+def to_color_bytes(red, green, blue, alpha):
+    return int(red * 255), int(green * 255), int(blue * 255), int(alpha * 255)
 
 
 @click.command()
@@ -28,15 +28,15 @@ def main(width, height, cmap, darken, outdir):
 
     for x in range(width):
         color = cmap(x / width)  # rgba
-        r, g, b, a = color
+        red, green, blue, alpha = color
 
-        color_bytes1 = to_color_bytes(r, g, b, a)
+        color_bytes1 = to_color_bytes(red, green, blue, alpha)
 
-        h, l, s = colorsys.rgb_to_hls(r, g, b)
-        l = l * (1 - darken)
-        r, g, b = colorsys.hls_to_rgb(h, l, s)
+        hue, lightness, saturation = colorsys.rgb_to_hls(red, green, blue)
+        lightness = lightness * (1 - darken)
+        red, green, blue = colorsys.hls_to_rgb(hue, lightness, saturation)
 
-        color_bytes2 = to_color_bytes(r, g, b, a)
+        color_bytes2 = to_color_bytes(red, green, blue, alpha)
 
         for y in range(height):
             im1.putpixel((x, y), color_bytes1)  # place the pixel
