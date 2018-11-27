@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/scls19fr/bargraph_image_generator.svg?branch=master)](https://travis-ci.org/scls19fr/bargraph_image_generator)
+[![Build Status](https://travis-ci.com/scls19fr/bargraph_image_generator.svg?branch=master)](https://travis-ci.com/scls19fr/bargraph_image_generator)
 
 # bargraph_image_generator
 A Python script to create gradient bargraph
